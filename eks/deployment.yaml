@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+        - name: node-app
+          image: 671790413030.dkr.ecr.us-east-1.amazonaws.com/node-app:latest
+          ports:
+            - containerPort: 8081
+      tolerations:
+      - key: "node-app"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
