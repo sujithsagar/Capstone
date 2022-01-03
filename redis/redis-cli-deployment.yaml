@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-cli-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-cli-deployment
+  template:
+    metadata:
+      labels:
+        app: redis-cli-deployment
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: redis:alpine
+        name: redis
+        command:
+            - "/bin/sh"
+            - "-c"
+            - "sleep 100000"
+        ports:
+        - containerPort: 6379
